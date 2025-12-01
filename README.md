@@ -3,7 +3,24 @@
 ## Overview
 Project created through Undergraduate Research Program at RPI. Data was collected from an experiment at Argonne National Lab (ANL) in summer 2025. This code can take a `.npz` file storing results and extract features needed for analysis
 
-## Work Flow
+## How to Use
+### 1. Clone this Repo
+In your terminal navigate to your project folder and run this command:
+```
+git clone https://github.com/wlhberesford/ANL_Experiment_Data_Extraction.git 
+```
+### 2. Upload Experiment Data to the ```Data``` Folder
+
+### 3. Update the file ```extremas.py``` to your data file and run using:
+```
+python extremas.py
+```
+*When testing this on a test file 52.1 MB it took 30-40 minutes*
+
+### 4. Use the notebook ```view_data.ipynb``` to generate data visualizations
+
+
+## Work Flow Description
 ### Data
 ANL exported experiment results in `.npz` files with the following arrays and dimmensions:
 * x (1,N): Time axis for experiments

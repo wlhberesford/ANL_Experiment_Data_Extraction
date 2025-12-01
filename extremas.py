@@ -95,7 +95,8 @@ def frame_min_max(data, frame, channel):
 
 def data_min_max(data):
     # create dataframe for results
-    extremas = pd.DataFrame(columns=['Frame', 'Channel', 'Local_Max', 'Time', 'V'])
+    extremas = pd.DataFrame(columns=['Phase', 'Channel', 'Local_Max', 'Time', 'V'])
+    phase = data["phase"]  # shape (M,)
     
     n_frames = len(data['BPDwf'])
     channel = 0
@@ -103,14 +104,14 @@ def data_min_max(data):
     for frame in range(n_frames):
         x_mins, x_max, y_mins, y_max = frame_min_max(data, frame, channel)
         for time, v in zip(x_mins, y_mins):
-            row = pd.Series({'Frame': frame, 
+            row = pd.Series({'Phase': frame, 
                              'Channel': channel, 
                              'Local_Max':False, 
                              'Time': time, 
                              'V': v})
             extremas = pd.concat([extremas, row.to_frame().T], ignore_index=True)
         for time, v in zip(x_max, y_max):
-            row = pd.Series({'Frame': frame, 
+            row = pd.Series({'Phase': frame, 
                              'Channel': channel, 
                              'Local_Max':True, 
                              'Time': time, 
@@ -119,17 +120,19 @@ def data_min_max(data):
         
         if(frame % 25 == 0):
             print(f"Processed frame {frame} of {n_frames} ({Time.time()-start}s)")
+            
+    extremas["Phase"] = extremas["Phase"].map(lambda x: phase[x])
     return extremas
 
 
 if __name__ == "__main__":
     
-    filename = "../Data/raw/CoarseScan.npz"
+    filename = "../Data/CoarseScan.npz"
     
     keys, data = unpack(filename, npz_format=True)
     
     extremas = data_min_max(data)
-    extremas.to_csv("../Data/Clean/fine_scan_extremas.csv", index=False)
+    extremas.to_csv(f"../Results/{filename.split("/")[-1].split(".")[0]}_extremas.csv", index=False)
     plt.figure(figsize=(8, 5))
     plt.scatter(extremas["Time"], extremas["V"], color="steelblue", alpha=0.7)
 
