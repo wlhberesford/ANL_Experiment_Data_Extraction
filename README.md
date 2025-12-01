@@ -1,7 +1,9 @@
 # ANL_Experiment_Data_Extraction
 
 ## Overview
-Project created through Undergraduate Research Program at RPI. Data was collected from an experiment at Argonne National Lab (ANL) in summer 2025. This code can take a `.npz` file storing results and extract features needed for analysis
+Project created through Undergraduate Research Program at Rensselaer Polytechnic Institute. Data was collected from an experiment at Argonne National Lab (ANL) in summer 2025. This code can take a `.npz` file storing results and extract features needed for analysis. 
+
+[Link to Paper](https://prebys.physics.ucdavis.edu/NAPAC-25/proceedings/pdf/MOP048.pdf)
 
 ## How to Use
 ### 1. Clone this Repo
